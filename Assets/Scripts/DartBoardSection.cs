@@ -78,7 +78,6 @@ public class DartBoardSection : MonoBehaviour
         {
             for (float t = 0, p = 0; t < time; t += Time.deltaTime, p = t / time)
             {
-                print(1 - p);
                 armor.material.SetFloat("_AnimationT", 1f - 2f * p);
                 yield return null;
             }

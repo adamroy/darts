@@ -17,14 +17,29 @@ public class DartSelector : MonoBehaviour
         public GameObject dart;
         public Button button;
     }
+
+    [Range(0f, 1f)]
+    public float usedIconScale;
+    public Image playerTurnIndicator;
     public List<DartButton> buttons;
+
+    private Color turnIndicatorColor;
+
+    private void Start()
+    {
+        turnIndicatorColor = playerTurnIndicator.color;
+    }
 
     public void SetEnabled(bool enabled)
     {
-        foreach(var db in buttons)
+        playerTurnIndicator.color = enabled ? turnIndicatorColor : buttons[0].button.colors.disabledColor;
+
+        foreach (var db in buttons)
         {
             if (!db.dartUsed)
+            {
                 db.button.interactable = enabled;
+            }
         }
     }
 
@@ -38,7 +53,14 @@ public class DartSelector : MonoBehaviour
     public void DartUsed(GameObject dart)
     {
         var dartButton = buttons.First((b) => b.dart == dart);
+        dartButton.button.transform.localScale = Vector3.one * usedIconScale;
         dartButton.button.interactable = false;
         dartButton.dartUsed = true;
+    }
+
+    public void SetSelectedDart(GameObject dart)
+    {
+        var dartButton = buttons.First((b) => b.dart == dart);
+        dartButton.button.Select();
     }
 }

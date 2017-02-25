@@ -68,6 +68,7 @@ public class GameGlue : MonoBehaviour
             if (nextDart != null)
             {
                 setDart(nextDart);
+                currentPlayerDarts.SetSelectedDart(nextDart);
             }
             else
             {
@@ -85,5 +86,8 @@ public class GameGlue : MonoBehaviour
 
             playerOneTurn = !playerOneTurn;
         }
+
+        playerOneDarts.SetEnabled(false);
+        playerTwoDarts.SetEnabled(false);
     }
 }

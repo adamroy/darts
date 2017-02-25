@@ -59,8 +59,6 @@ public class DartBoard : MonoBehaviour
         // Score the dart
         int points = dartInfo[dart].section.ScorePoints(dart.transform.position) * multiplier;
         dartInfo[dart].pointsScored = points;
-
-        print(points);
         if (OnPointsScored != null) OnPointsScored(dart, points);
     }
 
