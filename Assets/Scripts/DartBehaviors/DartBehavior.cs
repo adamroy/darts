@@ -9,19 +9,30 @@ public class DartBehavior : MonoBehaviour
 
     private void HitWall()
     {
+        HitWall(true);
+    }
+
+    private void HitWall(bool playSound)
+    {
         var board = DartBoard.Instance;
-        if (board.IsDartHit(this.gameObject))
+        if (board.IsDartHit(this.gameObject, playSound))
         {
             OnDartHit();
-            AudioManager.Play(Sfx);
+            if(playSound)
+                AudioManager.Play(Sfx);
         }
         else
         {
             OnDartMiss();
-            if (board.IsArmourSection(this.gameObject) == false)
-                AudioManager.Play("dart_hit_wall");
-            else
-                AudioManager.Play("hit_armor");
+
+            if (playSound)
+            {
+                if (board.IsArmourSection(this.gameObject) == false)
+                    AudioManager.Play("dart_hit_wall");
+                else
+                    AudioManager.Play("hit_armor");
+            }
+
             SendMessage("Fall");
         }
     }

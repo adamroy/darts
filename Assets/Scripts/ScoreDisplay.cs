@@ -38,12 +38,11 @@ public class ScoreDisplay : MonoBehaviour
 
     private IEnumerator ChangeScoreCoroutine(int amount)
     {
-        if (amount == 0) yield break;
         score += amount;
         var addedScore = Instantiate(this.scoreText.gameObject);
         addedScore.transform.SetParent(scoreText.transform.parent, true);
         addedScore.transform.localScale = Vector3.one;
-        addedScore.GetComponent<Text>().text = (amount > 0 ? "+" : "-") + Mathf.Abs(amount);
+        addedScore.GetComponent<Text>().text = (amount >= 0 ? "+" : "-") + Mathf.Abs(amount);
         var color = addedScore.GetComponent<Text>().color;
         color.a = 0f;
         addedScore.GetComponent<Text>().color = color;

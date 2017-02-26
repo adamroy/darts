@@ -8,6 +8,7 @@ public class DartBoardSection : MonoBehaviour
     public int points;
     public new Collider2D collider;
     public Renderer armor;
+    public bool isBullsEye = false;
 
     private bool isArmoured = false;
     public bool IsArmoured
@@ -53,8 +54,15 @@ public class DartBoardSection : MonoBehaviour
         StartCoroutine(ScaleUpCoroutine(0.25f, 1.2f));
     }
 
+    public  void ScaleUp(float time, float factor)
+    {
+        StartCoroutine(ScaleUpCoroutine(time, factor));
+    }
+
     private IEnumerator ScaleUpCoroutine(float time, float factor)
     {
+        yield return new WaitForSeconds(0.1f);
+
         var startScale = transform.localScale;
         transform.localScale = startScale * factor;
 
@@ -65,9 +73,17 @@ public class DartBoardSection : MonoBehaviour
 
     private void SetArmourDisplay(bool isArmoured)
     {
-        AudioManager.Play("armor", delay: 0.5f);
-        armor.enabled = true;
-        StartCoroutine(ArmourCoroutine());
+        if (isArmoured)
+        {
+            AudioManager.Play("armor", delay: 0.5f);
+            armor.enabled = true;
+            StartCoroutine(ArmourCoroutine());
+        }
+        else
+        {
+            armor.enabled = false;
+            StopAllCoroutines();
+        }
     }
 
     private IEnumerator ArmourCoroutine()
