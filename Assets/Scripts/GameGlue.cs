@@ -89,5 +89,6 @@ public class GameGlue : MonoBehaviour
 
         playerOneDarts.SetEnabled(false);
         playerTwoDarts.SetEnabled(false);
+        dartDisplayName.text = "Game Over";
     }
 }

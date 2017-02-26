@@ -57,7 +57,7 @@ public class ScoreDisplay : MonoBehaviour
         if (amount > 0) AudioManager.Play("cha", volume);
         else AudioManager.Play("cha_neg", volume);
 
-        for (float t = 0, p = 0; t < animationTime; t += Time.deltaTime, p = t / animationTime)
+        for (float t = 0; t < animationTime; t += Time.deltaTime)
         {
             float h = 0.5f * a * t * t + v0 * t;
             addedScore.transform.position = startPos + Vector3.up * h;
