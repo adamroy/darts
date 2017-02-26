@@ -75,6 +75,8 @@ public class DartInput : MonoBehaviour
                 center.rotation = Quaternion.LookRotation(-deltaPos);
             }
 
+            PowerArrow.DisplayPower(power);
+
             yield return null;
         }
 
@@ -86,5 +88,7 @@ public class DartInput : MonoBehaviour
             // Prevent dart from recieving new inputs
             this.enabled = false;
         }
+
+        PowerArrow.TurnOffDisplay();
     }
 }
