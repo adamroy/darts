@@ -88,7 +88,17 @@ public class DartBoard : MonoBehaviour
         StartCoroutine(RandomSectionKnockCoroutine(dart));
     }
 
+    public void FinalizeScore()
+    {
+        foreach(var di in dartInfo.Values)
+        {
+            di.dart.SendMessage("Finish");
+        }
+    }
+
     #endregion
+
+    #region Unity events
 
     private void Awake()
     {
@@ -104,7 +114,11 @@ public class DartBoard : MonoBehaviour
         foreach (var t in spinners)
             t.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed, Space.World);
     }
+
+    #endregion
     
+    #region private methods
+
     private void KnockSection(DartBoardSection sectionToKnock, GameObject dart)
     {
         var dartsRemoved = new List<GameObject>();
@@ -163,4 +177,6 @@ public class DartBoard : MonoBehaviour
         AudioManager.Play("dart_knock");
         KnockSection(sections[index], null);
     }
+
+    #endregion
 }

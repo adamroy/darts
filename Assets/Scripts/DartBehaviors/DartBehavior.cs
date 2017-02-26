@@ -37,13 +37,9 @@ public class DartBehavior : MonoBehaviour
         }
     }
 
-    protected virtual void OnDartHit()
-    {
+    protected virtual void OnDartHit() { }
 
-    }
+    protected virtual void OnDartMiss() { }
 
-    protected virtual void OnDartMiss()
-    {
-         
-    }
+    protected virtual void Finish() { }
 }

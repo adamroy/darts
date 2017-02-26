@@ -53,7 +53,7 @@ public class ScoreDisplay : MonoBehaviour
         float v0 = 4f * height / animationTime;
         float a = -8f * height / (animationTime * animationTime);
         
-        if (amount > 0) AudioManager.Play("cha", volume);
+        if (amount >= 0) AudioManager.Play("cha", volume);
         else AudioManager.Play("cha_neg", volume);
 
         for (float t = 0; t < animationTime; t += Time.deltaTime)
@@ -65,7 +65,7 @@ public class ScoreDisplay : MonoBehaviour
             yield return null;
         }
 
-        if (amount > 0) AudioManager.Play("ching", volume);
+        if (amount >= 0) AudioManager.Play("ching", volume);
         else AudioManager.Play("ching_neg", volume);
 
         Destroy(addedScore);

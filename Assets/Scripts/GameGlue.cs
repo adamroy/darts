@@ -11,6 +11,7 @@ public class GameGlue : MonoBehaviour
     public DartSelector playerOneDarts, playerTwoDarts;
     public ScoreDisplay p1ScoreDisplay, p2ScoreDisplay;
     public Text dartDisplayName;
+    public DartBoard dartboard;
 
     private int p1Score, p2Score;
 
@@ -86,9 +87,13 @@ public class GameGlue : MonoBehaviour
 
             playerOneTurn = !playerOneTurn;
         }
-
+        
         playerOneDarts.SetEnabled(false);
         playerTwoDarts.SetEnabled(false);
+
+        yield return new WaitForSeconds(2f);
+
+        dartboard.FinalizeScore();
         dartDisplayName.text = "Game Over";
     }
 }
