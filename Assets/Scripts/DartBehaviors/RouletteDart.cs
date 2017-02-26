@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwapperDart : DartBehavior
+public class RouletteDart : DartBehavior
 {
     private bool firstHit = true;
 

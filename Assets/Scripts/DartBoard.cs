@@ -83,30 +83,6 @@ public class DartBoard : MonoBehaviour
         KnockSection(sectionToKnock, dart);
     }
 
-    // Swaps this section with another random one
-    // Recalcs points for darts
-    public void RandomizeSection(GameObject dart)
-    {
-        // Get the section the dart originally hit
-        var sec = dartInfo[dart].section;
-        if (sec.isBullsEye) return;
-        
-        DetachAllDarts();
-
-        // Choose another section from remaining
-        var sections = this.sections.Where((s) => !s.isBullsEye).OrderBy(s => s.transform.localEulerAngles.z).ToList();
-        int index = sections.IndexOf(sec);
-        int swapIndex = (index + Random.Range(1, sections.Count / 2) * 2) % sections.Count;
-        var swapSec = sections[swapIndex];
-
-        // Swap their rotation
-        var secRot = sec.transform.localRotation;
-        sec.transform.localRotation = swapSec.transform.localRotation;
-        swapSec.transform.localRotation = secRot;
-
-        AttachAllDarts();
-    }
-
     public void RandomSectionKnock(GameObject dart)
     {
         StartCoroutine(RandomSectionKnockCoroutine(dart));
@@ -128,37 +104,7 @@ public class DartBoard : MonoBehaviour
         foreach (var t in spinners)
             t.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed, Space.World);
     }
-
-    // Detaches all darts from all sections, removing their score as well
-    // Leaves DartBoard in a 'limbo' state where darts need to be rattached
-    private void DetachAllDarts()
-    {
-        foreach (var di in dartInfo.Values)
-        {
-            di.dart.transform.SetParent(null);
-            di.section = null;
-            if (OnPointsScored != null)
-                OnPointsScored(di.dart, -di.pointsScored);
-        }
-
-        // Remove armor in case it gets moved
-        foreach (var sec in sections)
-            sec.IsArmoured = false;
-    }
-
-    // Attaches all darts to the board and scores them
-    private void AttachAllDarts()
-    {
-        // Perform in order so that effects are preserved
-        var darts = dartInfo.Values.OrderBy((di) => di.frameID).Select((di) => di.dart).ToList();
-        dartInfo.Clear();
-
-        foreach (var d in darts)
-        {
-            d.SendMessage("HitWall", false);
-        }
-    }
-
+    
     private void KnockSection(DartBoardSection sectionToKnock, GameObject dart)
     {
         var dartsRemoved = new List<GameObject>();
@@ -206,7 +152,7 @@ public class DartBoard : MonoBehaviour
                 t = v;
                 v += a;
                 sections[index].ScaleUp(t, 1.2f);
-                AudioManager.Play("boop2");
+                AudioManager.Play("boop");
                 if (v > 0.4f)
                     break;
             }
@@ -214,6 +160,7 @@ public class DartBoard : MonoBehaviour
             yield return null;
         }
 
+        AudioManager.Play("dart_knock");
         KnockSection(sections[index], null);
     }
 }
