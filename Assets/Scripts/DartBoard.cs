@@ -11,6 +11,7 @@ public class DartBoard : MonoBehaviour
     public Action<GameObject, int> OnPointsScored;
     public IEnumerable<GameObject> Darts { get { return dartInfo.Keys; } }
     public Transform[] spinners;
+    public float slideHeight;
 
     private List<DartBoardSection> sections;
     private Dictionary<GameObject, DartInfo> dartInfo = new Dictionary<GameObject, DartInfo>();
@@ -23,6 +24,9 @@ public class DartBoard : MonoBehaviour
     }
 
     private float rotationSpeed = 0;
+    private Vector3 initialPosition;
+    private float t = 0;
+    private float slideSpeed = 0;
 
     #region public interface methods
 
@@ -71,6 +75,11 @@ public class DartBoard : MonoBehaviour
         rotationSpeed += amount;
     }
 
+    public void IncreaseSlide(float amount)
+    {
+        slideSpeed += amount;
+    }
+
     public void ArmourSection(GameObject dart)
     {
         // Armour the section that this dart hit
@@ -107,12 +116,23 @@ public class DartBoard : MonoBehaviour
             t.Rotate(Vector3.forward, degrees, Space.World);
         Instance = this;
         sections = new List<DartBoardSection>(GetComponentsInChildren<DartBoardSection>());
+        initialPosition = transform.position;
     }
 
     private void Update()
     {
-        foreach (var t in spinners)
-            t.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed, Space.World);
+        foreach (var transf in spinners)
+            transf.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed, Space.World);
+
+        if (Mathf.Approximately(slideSpeed, 0) == false)
+        {
+            t += Time.deltaTime;
+            transform.position = initialPosition + Mathf.Sin(t * slideSpeed) * slideHeight * Vector3.up;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, initialPosition, 1f * Time.deltaTime);
+        }
     }
 
     #endregion
