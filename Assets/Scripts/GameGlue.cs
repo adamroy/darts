@@ -12,13 +12,15 @@ public class GameGlue : MonoBehaviour
     public ScoreDisplay p1ScoreDisplay, p2ScoreDisplay;
     public Text dartDisplayName;
     public DartBoard dartboard;
+    public CameraPan menuPan, randomizerPan, gamePan;
+    public DartRandomizer dartRandomizer;
 
     private int p1Score, p2Score;
 
     private void Start()
     {
         DartBoard.Instance.OnPointsScored += OnPlayerScored;
-        StartCoroutine(MainCoroutine());
+        StartCoroutine(MenuCoroutine());
     }
 
     private void Update()
@@ -41,8 +43,57 @@ public class GameGlue : MonoBehaviour
         }
     }
 
-    private IEnumerator MainCoroutine()
+    private IEnumerator MenuCoroutine()
     {
+        gamePan.SnapTo(false);
+        randomizerPan.SnapTo(false);
+
+        while(!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+
+        menuPan.PanTo(false);
+        randomizerPan.PanTo(true);
+
+        StartCoroutine(RandomizerCoroutine());
+    }
+
+    private IEnumerator RandomizerCoroutine()
+    {
+        dartRandomizer.Initialize();
+        yield return null;
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) == true);
+
+        bool block = true;
+        List<DartType> selectedDarts = null;
+        dartRandomizer.Randomize((selec) => { selectedDarts = selec; block = false; });
+
+        yield return new WaitWhile(() => block);
+
+        yield return new WaitForSeconds(1f);
+
+        randomizerPan.PanTo(false);
+        gamePan.PanTo(true);
+
+        StartCoroutine(MainCoroutine(selectedDarts));
+    }
+
+    private IEnumerator MainCoroutine(List<DartType> selectedDarts)
+    {
+        int i = 0; 
+        foreach(var dart in selectedDarts)
+        {
+            playerOneDarts.buttons[i].dart = dart.playerOnePrefab;
+            playerOneDarts.buttons[i].button.image.sprite = dart.buttonImage;
+
+            playerTwoDarts.buttons[i].dart = dart.playerTwoPrefab;
+            playerTwoDarts.buttons[i].button.image.sprite = dart.buttonImage;
+
+            i++;
+        }
+
         bool playerOneTurn = true;
         GameObject currentDartPrefab = null, currentDart = null;
         Action<GameObject> setDart = (GameObject dart) =>

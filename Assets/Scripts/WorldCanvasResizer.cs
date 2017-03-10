@@ -8,23 +8,19 @@ public class WorldCanvasResizer : MonoBehaviour
 {
     public new Camera camera;
 
-    private void Start()
+    private void Awake()
     {
         // Should just need to do once at start since resolution on phone games doesn't change during play
-        StartCoroutine(ResizeToFitCamera());
+        ResizeToFitCamera();
     }
 
-    private IEnumerator ResizeToFitCamera()
+    private void ResizeToFitCamera()
     {
-        var canvas = GetComponent<Canvas>();
+        var rectTransform = GetComponent<RectTransform>();
+        float aspect = Screen.width / (float)Screen.height;
 
-        // This forces the canvas to fit the screen (also moves it but that's not a big problem)
-        canvas.renderMode = RenderMode.ScreenSpaceCamera;
-
-        // One frame lets it take effect
-        yield return null;
-
-        // Switch back to worldspace to that we can pan our camera around
-        canvas.renderMode = RenderMode.WorldSpace;
+        var canvasSize = rectTransform.sizeDelta;
+        canvasSize.x = canvasSize.y * aspect;
+        rectTransform.sizeDelta = canvasSize;
     }
 }
