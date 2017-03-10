@@ -40,7 +40,7 @@ public class DartRandomizer : MonoBehaviour
 
         while (i < displayImages.Count)
         {
-            if (time > (i + 1) * timePerSelection)
+            if (time > i * timePerSelection)
                 i++;
 
             if (switchTime > timeBetweenSwitches)
@@ -51,6 +51,8 @@ public class DartRandomizer : MonoBehaviour
                     selectedDarts[j] = darts[choice];
                     displayImages[j].sprite = darts[choice].buttonImage;
                 }
+
+                AudioManager.Play("click");
 
                 switchTime = 0f;
             }

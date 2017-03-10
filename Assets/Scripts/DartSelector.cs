@@ -28,6 +28,7 @@ public class DartSelector : MonoBehaviour
     private void Start()
     {
         turnIndicatorColor = playerTurnIndicator.color;
+        buttons = buttons.OrderBy(b => -b.button.transform.position.y).ToList();
     }
 
     public void SetEnabled(bool enabled)

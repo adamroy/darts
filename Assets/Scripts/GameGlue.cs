@@ -55,6 +55,7 @@ public class GameGlue : MonoBehaviour
 
         menuPan.PanTo(false);
         randomizerPan.PanTo(true);
+        AudioManager.Play("swoosh");
 
         StartCoroutine(RandomizerCoroutine());
     }
@@ -76,12 +77,14 @@ public class GameGlue : MonoBehaviour
 
         randomizerPan.PanTo(false);
         gamePan.PanTo(true);
+        AudioManager.Play("swoosh");
 
-        StartCoroutine(MainCoroutine(selectedDarts));
+        StartCoroutine(GameCoroutine(selectedDarts));
     }
 
-    private IEnumerator MainCoroutine(List<DartType> selectedDarts)
+    private IEnumerator GameCoroutine(List<DartType> selectedDarts)
     {
+        // Assign selected dart to buttons
         int i = 0; 
         foreach(var dart in selectedDarts)
         {
