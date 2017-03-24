@@ -1,0 +1,60 @@
+Dart Types
+spin dart - speeds up dartboard spin
+armour dart - locks a section of board, ie all no new darts can hit that section
+knocker dart - knocks off all darts in section, unless armoured
+double point dart - double the points for section
+magnet dart - tracks toward nearest dart
+roulette dart - spins around the board and slows until it lands on section then knocks that section
+slider dart - makes board slide back and forth or up and down
+repel dart - repels from nearest dart (opposite of magnet)
+goofy dart - makes a fun noise
+**investment dart - some points each round (n/5ths?)
+
+Other ideas
+done (in git history)>swapper dart - swaps wherever it lands with another random section
+>blinder dart - makes points invisible for next player turn
+>scatter dart - splits dart in flight
+>vacuum dart - sucks a nearby enemy dart to the section it lands on
+
+TODO
+>>>board section 
+>>>scoring
+>>>dart effects
+>>>dart selection
+>>>dart randomization scene (casino?)
+splash screen
+main menu
+	Play button
+	Options?
+		Theme selection
+		Sound
+	Credits
+	Links
+game end and restart
+reset button on screen all the time
+skinnable theme
+dart randomization by dart type collections
+
+scenes transitions
+
+Polish/Juiciness!!!
+>>>*dart hit "bump" (sections expand out momentarily)
+>>>*section armour
+>>>*dart shadows
+>>>*sounds (hitting thunk, missing thunk, throwing whoosh, point score)
+>>>*dart names
+>>>*score cha-ching (numbers come out of score then go back in to add)
+>>>*player turn indicator
+>>>*dart power arrow visual
+>>>dart icons
+whoosh noise while panning
+game icon
+clicking noise for random spin
+menu/background music?
+
+Bugs
+Roulette spin goes beyond end of game time
+
+Possible expansions?
+Single player
+timed mode

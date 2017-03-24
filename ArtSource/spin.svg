@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg3710"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="spin.svg">
+  <defs
+     id="defs3704" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="137.85232"
+     inkscape:cy="728.66259"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="838"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3707">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       inkscape:export-filename="C:\Users\Adam\Desktop\path2997.png"
+       inkscape:export-ydpi="170.81"
+       inkscape:export-xdpi="170.81"
+       sodipodi:nodetypes="caccsccscc"
+       inkscape:connector-curvature="0"
+       d="m 99.71133,107.16235 c -23.13129,-5.72945 -33.65327,2.30706 -41.15392,14.80863 -5.43561,9.05971 -2.77243,22.31709 4.56669,31.36502 6.3413,-3.06829 14.1581,-6.43585 14.1581,-6.43585 0,0 -6.23198,46.06642 -15.19316,51.2309 -8.33691,4.8047 -56.519194,-19.40917 -56.519194,-19.40917 l 14.363698,-6.32847 C 10.265194,153.94764 9.934239,130.71828 19.254885,108.61306 34.85397,71.617643 77.49022,54.272497 114.48563,69.871577 z"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path2999" />
+    <path
+       id="path3001"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 85.736429,174.61644 c 23.219701,5.35989 33.612201,-2.84337 40.912571,-15.46294 5.29046,-9.14523 2.41623,-22.35846 -5.06622,-31.28822 -6.29157,3.16901 -14.05368,6.66078 -14.05368,6.66078 0,0 5.49666,-46.159932 14.37436,-51.466639 8.25924,-4.93702 56.82148,18.505509 56.82148,18.505509 l -14.26096,6.5567 c 9.96123,18.28926 10.66253,41.51039 1.69553,63.76142 -15.00721,37.23944 -57.36148,55.2622 -94.600908,40.25499 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="caccsccscc"
+       inkscape:export-xdpi="170.81"
+       inkscape:export-ydpi="170.81"
+       inkscape:export-filename="C:\Users\Adam\Desktop\path2997.png" />
+  </g>
+</svg>
