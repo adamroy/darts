@@ -69,6 +69,6 @@ public class ScoreDisplay : MonoBehaviour
         else AudioManager.Play("ching_neg", volume);
 
         Destroy(addedScore);
-        scoreText.text = "<b>" + score + "</b>";
+        scoreText.text = score.ToString();
     }
 }

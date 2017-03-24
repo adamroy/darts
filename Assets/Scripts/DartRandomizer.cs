@@ -3,11 +3,19 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Random = UnityEngine.Random;
 
 public class DartRandomizer : MonoBehaviour
 {
-    public List<DartType> darts;
+    [Serializable]
+    public class WeightedDartType
+    {
+        public DartType dart;
+        public float weight;
+    }
+
+    public List<WeightedDartType> darts;
     public List<Image> displayImages; // <- determines the number of darts selected
     public float randomizationTime;
     public float timeBetweenSwitches;
@@ -17,13 +25,6 @@ public class DartRandomizer : MonoBehaviour
     public void Initialize()
     {
         selectedDarts = new List<DartType>();
-
-        foreach(var di in displayImages)
-        {
-            int choice = Random.Range(0, darts.Count);
-            selectedDarts.Add(darts[choice]);
-            di.sprite = darts[choice].buttonImage;
-        }
     }
 
     public void Randomize(Action<List<DartType>> callback)
@@ -31,8 +32,30 @@ public class DartRandomizer : MonoBehaviour
         StartCoroutine(RandomizeCoroutine(callback));
     }
 
+    private DartType SelectRandomDart()
+    {
+        float sum = darts.Aggregate(0f, (acc, d) => acc + d.weight);
+        float selec = Random.Range(0, sum);
+        float accum = 0f;
+        foreach(var d in darts)
+        {
+            if (accum < selec && selec <= accum + d.weight)
+                return d.dart;
+            accum += d.weight;
+        }
+
+        return null;
+    }
+
     private IEnumerator RandomizeCoroutine(Action<List<DartType>> callback)
     {
+        foreach (var di in displayImages)
+        {
+            var dart = SelectRandomDart();
+            selectedDarts.Add(dart);
+            di.sprite = dart.buttonImage;
+        }
+
         float timePerSelection = randomizationTime / displayImages.Count;
         int i = 0;
         float time = 0f;
@@ -47,9 +70,9 @@ public class DartRandomizer : MonoBehaviour
             {
                 for (int j = i; j < displayImages.Count; j++)
                 {
-                    int choice = Random.Range(0, darts.Count);
-                    selectedDarts[j] = darts[choice];
-                    displayImages[j].sprite = darts[choice].buttonImage;
+                    var dart = SelectRandomDart();
+                    selectedDarts[j] = dart;
+                    displayImages[j].sprite = dart.buttonImage;
                 }
 
                 AudioManager.Play("click");

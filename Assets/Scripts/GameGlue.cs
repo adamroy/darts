@@ -106,7 +106,7 @@ public class GameGlue : MonoBehaviour
             currentDartPrefab = dart;
             currentDart = Instantiate(dart, dartSpawnLocation.position, dartSpawnLocation.rotation) as GameObject;
             currentDart.SendMessage("Init", dartSpawnLocation);
-            dartDisplayName.text = "<b>" + currentDart.GetComponent<DartBehavior>().displayName + "</b>";
+            dartDisplayName.text = currentDart.GetComponent<DartBehavior>().displayName;
         };
 
         playerOneDarts.OnDartSelected += setDart;

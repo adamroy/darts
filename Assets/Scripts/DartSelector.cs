@@ -53,7 +53,7 @@ public class DartSelector : MonoBehaviour
 
     public void DartUsed(GameObject dart)
     {
-        var dartButton = buttons.First((b) => b.dart == dart);
+        var dartButton = buttons.First((b) => b.dart == dart && b.dartUsed == false);
         dartButton.button.transform.localScale = Vector3.one * usedIconScale;
         dartButton.button.interactable = false;
         dartButton.dartUsed = true;

@@ -10,6 +10,11 @@ repel dart - repels from nearest dart (opposite of magnet)
 goofy dart - makes a fun noise
 **investment dart - some points each round (n/5ths?)
 
+Darts to cut maybe
+>slider
+>spin
+>investment
+
 Other ideas
 done (in git history)>swapper dart - swaps wherever it lands with another random section
 >blinder dart - makes points invisible for next player turn
@@ -22,6 +27,8 @@ TODO
 >>>dart effects
 >>>dart selection
 >>>dart randomization scene (casino?)
+>>>scenes transitions
+>>> weighted darts types
 splash screen
 main menu
 	Play button
@@ -32,10 +39,9 @@ main menu
 	Links
 game end and restart
 reset button on screen all the time
-skinnable theme
-dart randomization by dart type collections
+skinnable theme - X
+dart randomization by dart type collections - X
 
-scenes transitions
 
 Polish/Juiciness!!!
 >>>*dart hit "bump" (sections expand out momentarily)
@@ -47,10 +53,10 @@ Polish/Juiciness!!!
 >>>*player turn indicator
 >>>*dart power arrow visual
 >>>dart icons
-whoosh noise while panning
-game icon
-clicking noise for random spin
-menu/background music?
+>>>whoosh noise while panning
+>>>game icon
+>>>clicking noise for random spin
+menu/background music? - X
 
 Bugs
 Roulette spin goes beyond end of game time
