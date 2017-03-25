@@ -51,9 +51,8 @@ public class DartRandomizer : MonoBehaviour
     {
         foreach (var di in displayImages)
         {
-            var dart = SelectRandomDart();
+            var dart = darts.First().dart;
             selectedDarts.Add(dart);
-            di.sprite = dart.buttonImage;
         }
 
         float timePerSelection = randomizationTime / displayImages.Count;
@@ -63,19 +62,28 @@ public class DartRandomizer : MonoBehaviour
 
         while (i < displayImages.Count)
         {
-            if (time > i * timePerSelection)
+            if (time > (i + 1) * timePerSelection)
+            {
+                // Randomize again here bc the 'no repeat' below messes with weighted distribution
+                var dart = SelectRandomDart();
+                selectedDarts[i] = dart;
+                displayImages[i].sprite = dart.buttonImage;
                 i++;
+            }
 
             if (switchTime > timeBetweenSwitches)
             {
                 for (int j = i; j < displayImages.Count; j++)
                 {
                     var dart = SelectRandomDart();
+                    // Make sure we're selecting a new dart otherwise it looks like it 'hangs' for a second
+                    while (selectedDarts[j] == dart)
+                        dart = SelectRandomDart();
                     selectedDarts[j] = dart;
                     displayImages[j].sprite = dart.buttonImage;
                 }
 
-                AudioManager.Play("click");
+                AudioManager.Play("click", 0.75f);
 
                 switchTime = 0f;
             }

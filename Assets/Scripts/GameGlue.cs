@@ -114,6 +114,9 @@ public class GameGlue : MonoBehaviour
 
         while (true)
         {
+            // Let the dartboard finish activites such as roulette
+            yield return dartboard.AwaitActivities();
+
             playerOneDarts.SetEnabled(playerOneTurn);
             playerTwoDarts.SetEnabled(!playerOneTurn);
             var currentPlayerDarts = playerOneTurn ? playerOneDarts : playerTwoDarts;
@@ -132,7 +135,6 @@ public class GameGlue : MonoBehaviour
             }
 
             yield return new WaitUntil(() => currentDart == null || currentDart.GetComponent<DartThrow>().HasHitWall);
-
 
             // Let the dart tracker know we've used a dart
             currentPlayerDarts.DartUsed(currentDartPrefab);

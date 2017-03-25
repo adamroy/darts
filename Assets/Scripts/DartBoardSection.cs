@@ -16,6 +16,7 @@ public class DartBoardSection : MonoBehaviour
         get { return isArmoured; }
         set { isArmoured = value; SetArmourDisplay(value); }
     }
+    private Coroutine armourCoroutine;
 
     [Serializable]
     public class MultiplierSection
@@ -54,14 +55,14 @@ public class DartBoardSection : MonoBehaviour
         StartCoroutine(ScaleUpCoroutine(0.25f, 1.2f));
     }
 
-    public  void ScaleUp(float time, float factor)
+    public void ScaleUp(float time, float factor)
     {
         StartCoroutine(ScaleUpCoroutine(time, factor));
     }
 
     private IEnumerator ScaleUpCoroutine(float time, float factor)
     {
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
 
         var startScale = transform.localScale;
         transform.localScale = startScale * factor;
@@ -77,12 +78,13 @@ public class DartBoardSection : MonoBehaviour
         {
             AudioManager.Play("armor", delay: 0.5f);
             armor.enabled = true;
-            StartCoroutine(ArmourCoroutine());
+            armourCoroutine = StartCoroutine(ArmourCoroutine());
         }
         else
         {
             armor.enabled = false;
-            StopAllCoroutines();
+            if (armourCoroutine != null)
+                StopCoroutine(armourCoroutine);
         }
     }
 

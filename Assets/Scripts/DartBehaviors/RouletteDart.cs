@@ -13,7 +13,6 @@ public class RouletteDart : DartBehavior
         if (firstHit == true)
         {
             firstHit = false;
-            // board.RandomizeSection(this.gameObject);
             board.RandomSectionKnock(this.gameObject);
         }
     }

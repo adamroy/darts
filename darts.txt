@@ -57,9 +57,10 @@ Polish/Juiciness!!!
 >>>game icon
 >>>clicking noise for random spin
 menu/background music? - X
+no button deselect when throwing dart
 
 Bugs
-Roulette spin goes beyond end of game time
+>>>Roulette spin goes beyond end of game time
 
 Possible expansions?
 Single player

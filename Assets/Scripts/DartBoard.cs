@@ -27,6 +27,7 @@ public class DartBoard : MonoBehaviour
     private Vector3 initialPosition;
     private float t = 0;
     private float slideSpeed = 0;
+    private List<Coroutine> activeCoroutines;
 
     #region public interface methods
 
@@ -94,7 +95,8 @@ public class DartBoard : MonoBehaviour
 
     public void RandomSectionKnock(GameObject dart)
     {
-        StartCoroutine(RandomSectionKnockCoroutine(dart));
+        var cr = StartCoroutine(RandomSectionKnockCoroutine(dart));
+        activeCoroutines.Add(cr);
     }
 
     public void FinalizeScore()
@@ -103,6 +105,11 @@ public class DartBoard : MonoBehaviour
         {
             di.dart.SendMessage("Finish");
         }
+    }
+
+    public Coroutine AwaitActivities()
+    {
+        return StartCoroutine(AwaitActivitiesCoroutine());
     }
 
     #endregion
@@ -117,6 +124,7 @@ public class DartBoard : MonoBehaviour
         Instance = this;
         sections = new List<DartBoardSection>(GetComponentsInChildren<DartBoardSection>());
         initialPosition = transform.position;
+        activeCoroutines = new List<Coroutine>();
     }
 
     private void Update()
@@ -173,6 +181,7 @@ public class DartBoard : MonoBehaviour
         var initialSec = dartInfo[dart].section;
 
         int index = sections.IndexOf(initialSec);
+        if (index < 0) index = 0;
         float t = 0f;
         float v = Random.value * 0.1f;
         float a = 0.01f;
@@ -196,6 +205,16 @@ public class DartBoard : MonoBehaviour
 
         AudioManager.Play("dart_knock");
         KnockSection(sections[index], null);
+    }
+
+    private IEnumerator AwaitActivitiesCoroutine()
+    {
+        while(activeCoroutines.Count > 0)
+        {
+            var cr = activeCoroutines.First();
+            yield return cr;
+            activeCoroutines.Remove(cr);
+        }
     }
 
     #endregion
