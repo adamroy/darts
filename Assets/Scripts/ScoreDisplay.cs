@@ -20,6 +20,12 @@ public class ScoreDisplay : MonoBehaviour
         deltaScore = 0;
     }
 
+    public void Reset()
+    {
+        score = 0;
+        scoreText.text = score.ToString();
+    }
+
     public void ChangeScore(int amount)
     {
         frameID = Time.frameCount;

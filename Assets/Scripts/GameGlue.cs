@@ -14,12 +14,6 @@ public class GameGlue : MonoBehaviour
         StartCoroutine(MenuCoroutine());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene(0);
-    }
-
     private IEnumerator MenuCoroutine()
     {
         gamePan.SnapTo(false);
@@ -62,5 +56,13 @@ public class GameGlue : MonoBehaviour
     private IEnumerator GameCoroutine(List<DartType> selectedDarts)
     {
         yield return gameplay.StartGame(selectedDarts);
+        menuPan.SnapTo(false, true);
+        AudioManager.Play("swoosh");
+        var cr = gamePan.PanTo(false);
+        yield return menuPan.PanTo(true, true);
+        yield return cr;
+
+        gameplay.Reset();
+        StartCoroutine(MenuCoroutine());
     }
 }

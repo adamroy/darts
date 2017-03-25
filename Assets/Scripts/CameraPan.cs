@@ -17,19 +17,22 @@ public class CameraPan : MonoBehaviour
         startPosition = transform.position;
     }
 
-    public void SnapTo(bool start)
+    public void SnapTo(bool start, bool flipped = false)
     {
+        var panDistance = this.panDistance * (flipped ? -1 : 1);
         IsAtStart = start;
         transform.position = start ? startPosition : startPosition + panDistance;
     }
 
-    public Coroutine PanTo(bool toStart)
+    public Coroutine PanTo(bool toStart, bool flipped = false)
     {
-        return StartCoroutine(PanToCoroutine(toStart));
+        return StartCoroutine(PanToCoroutine(toStart, flipped));
     }
 
-    private IEnumerator PanToCoroutine(bool toStart)
+    private IEnumerator PanToCoroutine(bool toStart, bool flipped)
     {
+        var panDistance = this.panDistance * (flipped ? -1 : 1);
+
         if (IsAtStart == toStart)
             yield break;
         IsPanning = true;

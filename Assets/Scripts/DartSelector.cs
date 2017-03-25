@@ -64,4 +64,14 @@ public class DartSelector : MonoBehaviour
         var dartButton = buttons.First((b) => b.dart == dart);
         dartButton.button.Select();
     }
+
+    public void Reset()
+    {
+        foreach(var db in buttons)
+        {
+            db.dartUsed = false;
+            db.button.interactable = true;
+            db.button.transform.localScale = Vector3.one;
+        }
+    }
 }

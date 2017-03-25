@@ -112,6 +112,18 @@ public class DartBoard : MonoBehaviour
         return StartCoroutine(AwaitActivitiesCoroutine());
     }
 
+    public void Reset()
+    {
+        StopAllCoroutines();
+
+        foreach(var sec in sections)
+            sec.IsArmoured = false;
+
+        foreach (var kvp in dartInfo)
+            Destroy(kvp.Key);
+        dartInfo.Clear();
+    }
+
     #endregion
 
     #region Unity events

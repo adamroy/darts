@@ -13,10 +13,18 @@ public class Gameplay : MonoBehaviour
     public DartSelector playerOneDarts, playerTwoDarts;
 
     private int p1Score, p2Score;
+    private bool quit = false;
+    private GameObject currentDart = null;
 
     private void Start()
     {
         DartBoard.Instance.OnPointsScored += OnPlayerScored;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            QuitSession();
     }
 
     private void OnPlayerScored(GameObject dart, int points)
@@ -40,16 +48,27 @@ public class Gameplay : MonoBehaviour
 
     public void QuitSession()
     {
-        StopAllCoroutines();
+        quit = true;
     }
 
     public void Reset()
     {
-
+        dartboard.Reset();
+        if(currentDart !=null)
+            Destroy(currentDart);
+        currentDart = null;
+        quit = false;
+        p1Score = p2Score = 0;
+        p1ScoreDisplay.Reset();
+        p2ScoreDisplay.Reset();
+        playerOneDarts.Reset();
+        playerTwoDarts.Reset();
     }
 
     private IEnumerator GameCoroutine(List<DartType> selectedDarts)
     {
+        quit = false;
+
         // Assign selected dart to buttons
         int i = 0;
         foreach (var dart in selectedDarts)
@@ -64,7 +83,7 @@ public class Gameplay : MonoBehaviour
         }
 
         bool playerOneTurn = true;
-        GameObject currentDartPrefab = null, currentDart = null;
+        GameObject currentDartPrefab = null;
         Action<GameObject> setDart = (GameObject dart) =>
         {
             if (currentDart != null) Destroy(currentDart);
@@ -72,11 +91,18 @@ public class Gameplay : MonoBehaviour
             currentDartPrefab = dart;
             currentDart = Instantiate(dart, dartSpawnLocation.position, dartSpawnLocation.rotation) as GameObject;
             currentDart.SendMessage("Init", dartSpawnLocation);
+            //currentDart.transform.SetParent(this.transform);
             dartDisplayName.text = currentDart.GetComponent<DartBehavior>().displayName;
         };
 
         playerOneDarts.OnDartSelected += setDart;
         playerTwoDarts.OnDartSelected += setDart;
+
+        Action quitAction = () =>
+        {
+            playerOneDarts.OnDartSelected -= setDart;
+            playerTwoDarts.OnDartSelected -= setDart;
+        };
 
         while (true)
         {
@@ -100,7 +126,13 @@ public class Gameplay : MonoBehaviour
                 break;
             }
 
-            yield return new WaitUntil(() => currentDart == null || currentDart.GetComponent<DartThrow>().HasHitWall);
+            yield return new WaitUntil(() => currentDart == null || currentDart.GetComponent<DartThrow>().HasHitWall || quit == true);
+
+            if (quit)
+            {
+                quitAction();
+                yield break;
+            }
 
             // Let the dart tracker know we've used a dart
             currentPlayerDarts.DartUsed(currentDartPrefab);

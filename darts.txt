@@ -38,7 +38,7 @@ main menu
 	Credits
 	Links
 game end and restart
-reset button on screen all the time
+>>>reset button on screen all the time
 skinnable theme - X
 dart randomization by dart type collections - X
 
