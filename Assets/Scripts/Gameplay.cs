@@ -148,6 +148,11 @@ public class Gameplay : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         dartboard.FinalizeScore();
+
+        if (p1Score > p2Score)
+            yield return playerOneDarts.SignifyWin();
+        else
+            yield return playerTwoDarts.SignifyWin();
         dartDisplayName.text = "Game Over";
     }
 

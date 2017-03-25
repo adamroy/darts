@@ -73,5 +73,20 @@ public class DartSelector : MonoBehaviour
             db.button.interactable = true;
             db.button.transform.localScale = Vector3.one;
         }
+
+        var spin = playerTurnIndicator.GetComponent<SpinAndPop>();
+        if (spin != null)
+            Destroy(spin);
+    }
+
+    public Coroutine SignifyWin()
+    {
+        playerTurnIndicator.color = turnIndicatorColor;
+        var spin = playerTurnIndicator.gameObject.AddComponent<SpinAndPop>();
+        spin.spinTime = 0.25f;
+        spin.spins = 6;
+        spin.popScale = 1.5f;
+        spin.popTime = 2f;
+        return spin.Go();
     }
 }
