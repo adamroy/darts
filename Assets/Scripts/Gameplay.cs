@@ -11,6 +11,7 @@ public class Gameplay : MonoBehaviour
     public Text dartDisplayName;
     public ScoreDisplay p1ScoreDisplay, p2ScoreDisplay;
     public DartSelector playerOneDarts, playerTwoDarts;
+    public ParticleSystem confetti;
 
     private int p1Score, p2Score;
     private bool quit = false;
@@ -148,12 +149,21 @@ public class Gameplay : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         dartboard.FinalizeScore();
-
-        if (p1Score > p2Score)
-            yield return playerOneDarts.SignifyWin();
-        else
-            yield return playerTwoDarts.SignifyWin();
         dartDisplayName.text = "Game Over";
+
+        if (p1Score != p2Score)
+        {
+            AudioManager.Play("drumroll_cymbol");
+            confetti.startColor = p1Score > p2Score ? playerOneDarts.turnIndicatorColor : playerTwoDarts.turnIndicatorColor;
+            confetti.Play();
+            if (p1Score > p2Score)
+                yield return playerOneDarts.SignifyWin();
+            else
+                yield return playerTwoDarts.SignifyWin();
+
+        }
+
+        yield return new WaitForSeconds(3f);
     }
 
 }

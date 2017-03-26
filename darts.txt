@@ -31,13 +31,13 @@ TODO
 >>> weighted darts types
 splash screen
 main menu
-	Play button
+	>>>Play button
 	Options?
 		Theme selection
 		Sound
 	Credits
 	Links
-game end and restart
+>>>game end and restart
 >>>reset button on screen all the time
 skinnable theme - X
 dart randomization by dart type collections - X
@@ -57,7 +57,7 @@ Polish/Juiciness!!!
 >>>game icon
 >>>clicking noise for random spin
 menu/background music? - X
-no button deselect when throwing dart
+>>>no button deselect when throwing dart
 
 Bugs
 >>>Roulette spin goes beyond end of game time

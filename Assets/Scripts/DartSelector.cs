@@ -23,7 +23,7 @@ public class DartSelector : MonoBehaviour
     public Image playerTurnIndicator;
     public List<DartButton> buttons;
 
-    private Color turnIndicatorColor;
+    public Color turnIndicatorColor { get; private set; }
 
     private void Start()
     {
@@ -83,8 +83,8 @@ public class DartSelector : MonoBehaviour
     {
         playerTurnIndicator.color = turnIndicatorColor;
         var spin = playerTurnIndicator.gameObject.AddComponent<SpinAndPop>();
-        spin.spinTime = 0.25f;
-        spin.spins = 6;
+        spin.spinTime = 0.4f;
+        spin.spins = 3;
         spin.popScale = 1.5f;
         spin.popTime = 2f;
         return spin.Go();
