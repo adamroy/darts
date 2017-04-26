@@ -11,7 +11,7 @@ public class CameraPan : MonoBehaviour
 
     private Vector3 startPosition;
 
-    private void Start()
+    private void Awake()
     {
         IsAtStart = true;
         startPosition = transform.position;

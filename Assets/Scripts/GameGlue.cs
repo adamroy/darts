@@ -5,20 +5,37 @@ using System.Collections.Generic;
 
 public class GameGlue : MonoBehaviour
 {
-    public CameraPan menuPan, randomizerPan, gamePan;
+    public CameraPan splashPan, menuPan, randomizerPan, gamePan;
+    public Fade blackFade, spashFade;
     public DartRandomizer dartRandomizer;
     public Gameplay gameplay;
 
     private void Start()
     {
+        StartCoroutine(SplashCoroutine());
+    }
+
+    private IEnumerator SplashCoroutine()
+    {
+        splashPan.SnapTo(true);
+        gamePan.SnapTo(false);
+        randomizerPan.SnapTo(false);
+        menuPan.SnapTo(false);
+
+        yield return blackFade.FadeItem(false);
+
+        yield return new WaitForSeconds(5);
+
+        spashFade.FadeItem(false);
+        AudioManager.Play("swoosh");
+        splashPan.PanTo(false);
+        yield return menuPan.PanTo(true);
+
         StartCoroutine(MenuCoroutine());
     }
 
     private IEnumerator MenuCoroutine()
     {
-        gamePan.SnapTo(false);
-        randomizerPan.SnapTo(false);
-
         while(!Input.GetMouseButtonDown(0))
         {
             yield return null;
