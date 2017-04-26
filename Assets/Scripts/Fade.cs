@@ -5,6 +5,7 @@ using System.Collections;
 public class Fade : MonoBehaviour
 {
     public float time;
+    public bool disableOnInvisible;
 
     private Image image;
 
@@ -15,6 +16,7 @@ public class Fade : MonoBehaviour
 
     public Coroutine FadeItem(bool alpha)
     {
+        gameObject.SetActive(true);
         return StartCoroutine(FadeCoroutine(alpha));
     }
     
@@ -27,6 +29,11 @@ public class Fade : MonoBehaviour
             image.color = c;
 
             yield return null;
+        }
+
+        if(alpha == false && disableOnInvisible == true)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

@@ -114,6 +114,8 @@ public class Gameplay : MonoBehaviour
             playerTwoDarts.SetEnabled(!playerOneTurn);
             var currentPlayerDarts = playerOneTurn ? playerOneDarts : playerTwoDarts;
 
+            yield return new WaitForSeconds(0.25f);
+
             // Get the next available dart as a default
             var nextDart = currentPlayerDarts.NextDart;
             if (nextDart != null)

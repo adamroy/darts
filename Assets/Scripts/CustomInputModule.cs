@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 namespace UnityEngine.EventSystems
@@ -311,7 +312,7 @@ namespace UnityEngine.EventSystems
 
             // PointerDown notification
             if (data.PressedThisFrame())
-            {
+            {                
                 pointerEvent.eligibleForClick = true;
                 pointerEvent.delta = Vector2.zero;
                 pointerEvent.dragging = false;
@@ -319,7 +320,7 @@ namespace UnityEngine.EventSystems
                 pointerEvent.pressPosition = pointerEvent.position;
                 pointerEvent.pointerPressRaycast = pointerEvent.pointerCurrentRaycast;
 
-                if (EventSystem.current.IsPointerOverGameObject())
+                if (EventSystem.current.IsPointerOverGameObject() && (currentOverGo != null && currentOverGo.GetComponent<Selectable>() != null && currentOverGo.GetComponent<Selectable>().IsInteractable()))
                 {
                     DeselectIfSelectionChanged(currentOverGo, pointerEvent);
                 }
