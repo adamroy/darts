@@ -31,7 +31,11 @@ public class Fade : MonoBehaviour
             yield return null;
         }
 
-        if(alpha == false && disableOnInvisible == true)
+        var cl = image.color;
+        cl.a = alpha ? 1 : 0;
+        image.color = cl;
+
+        if (alpha == false && disableOnInvisible == true)
         {
             gameObject.SetActive(false);
         }
