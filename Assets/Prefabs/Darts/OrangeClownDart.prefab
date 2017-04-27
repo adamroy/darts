@@ -139,9 +139,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 70a893624938c8046926968a719972cf, type: 3}
   - {fileID: 8300000, guid: 19d4237b96def75499c2c6bb62ca09f1, type: 3}
   - {fileID: 8300000, guid: 5afea91630f81a7488816fecb77ab005, type: 3}
-  - {fileID: 8300000, guid: 66866aeba23239a4691a0ed9baaaadb7, type: 3}
-  - {fileID: 8300000, guid: f124bb146015acf4bbc5579b74517574, type: 3}
   - {fileID: 8300000, guid: 272aad48c7e60eb4bbba4942aa4da196, type: 3}
+  - {fileID: 8300000, guid: f124bb146015acf4bbc5579b74517574, type: 3}
   missClips:
   - {fileID: 8300000, guid: cda4460e9b08e32419739ce50ffcbb24, type: 3}
   - {fileID: 8300000, guid: 3e6d2a8e66bf20d4e830c0240b05bd68, type: 3}
